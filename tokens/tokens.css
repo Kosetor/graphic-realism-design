@@ -1,0 +1,99 @@
+/* Graphic Realism Design Tokens v1.0.0
+   https://github.com/Kosetor/graphic-realism-design
+*/
+
+:root {
+  /* Surfaces */
+  --mgr-bg-void: #0b0c0e;
+  --mgr-bg-base: #12141a;
+  --mgr-bg-panel: #1a1d24;
+  --mgr-bg-elevated: #242832;
+  --mgr-bg-white: #e8eaef;
+  --mgr-bg-frost: #f4f5f7;
+
+  /* Ink */
+  --mgr-ink-primary: #0b0c0e;
+  --mgr-ink-on-dark: #f4f5f7;
+  --mgr-ink-muted: #8b919c;
+  --mgr-ink-faint: #5a606c;
+
+  /* Lines */
+  --mgr-line: #2e3440;
+  --mgr-line-strong: #4a5160;
+  --mgr-line-on-light: #c5c9d2;
+
+  /* Accents */
+  --mgr-accent-signal: #ff3b4a;
+  --mgr-accent-volt: #c8f542;
+  --mgr-accent-cyan: #3de0ff;
+  --mgr-accent-amber: #ffb020;
+  --mgr-accent-violet: #a78bfa;
+
+  /* Hazard */
+  --mgr-hazard-a: #0b0c0e;
+  --mgr-hazard-b: #f5c400;
+  --mgr-hazard-w: #f4f5f7;
+
+  /* Semantic */
+  --mgr-ok: #3ddc97;
+  --mgr-warn: var(--mgr-accent-amber);
+  --mgr-err: var(--mgr-accent-signal);
+  --mgr-info: var(--mgr-accent-cyan);
+
+  /* Typography */
+  --mgr-font-ui: "Inter", "IBM Plex Sans", "Helvetica Neue", system-ui, sans-serif;
+  --mgr-font-display: "Space Grotesk", "Chakra Petch", "DIN Condensed", sans-serif;
+  --mgr-font-mono: "IBM Plex Mono", "JetBrains Mono", "Roboto Mono", ui-monospace, monospace;
+
+  --mgr-fs-xs: 11px;
+  --mgr-fs-sm: 12px;
+  --mgr-fs-md: 14px;
+  --mgr-fs-lg: 16px;
+  --mgr-fs-xl: 20px;
+  --mgr-fs-2xl: 28px;
+  --mgr-fs-3xl: 40px;
+
+  --mgr-lh-tight: 1.15;
+  --mgr-lh-ui: 1.35;
+  --mgr-lh-body: 1.5;
+
+  --mgr-track-display: 0.04em;
+  --mgr-track-label: 0.08em;
+
+  /* Space */
+  --mgr-space-1: 4px;
+  --mgr-space-2: 8px;
+  --mgr-space-3: 12px;
+  --mgr-space-4: 16px;
+  --mgr-space-5: 24px;
+  --mgr-space-6: 32px;
+  --mgr-space-7: 48px;
+
+  /* Radius */
+  --mgr-radius-none: 0;
+  --mgr-radius-sm: 2px;
+  --mgr-radius-md: 4px;
+  --mgr-radius-lg: 8px;
+  --mgr-radius-pill: 999px;
+
+  /* Borders & icons */
+  --mgr-border: 1px;
+  --mgr-border-strong: 2px;
+  --mgr-icon-size: 24px;
+  --mgr-icon-stroke: 1.75px;
+  --mgr-hit: 44px;
+
+  /* Motion */
+  --mgr-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --mgr-dur-fast: 120ms;
+  --mgr-dur-ui: 180ms;
+  --mgr-dur-panel: 280ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --mgr-dur-fast: 0ms;
+    --mgr-dur-ui: 0ms;
+    --mgr-dur-panel: 0ms;
+  }
+}
