@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.1 — 2026-08-13
+
+### Fixed
+- Corner cut chrome: `clip-path` + inset `box-shadow` (no torn border)
+- Light-panel chip contrast
+
+### Added
+- Google Fonts (Inter, Space Grotesk, IBM Plex Mono) in examples
+- Self-contained HTML demos (`examples/self-contained/`)
+- GitHub Pages site under `docs/` + Actions workflow
+- Live demo index
+
 ## 1.0.0 — 2026-08-13
 
 ### Added
@@ -9,7 +21,7 @@
 - tokens (CSS + JSON)
 - agents: ui, slides, graphics
 - icons outline/solid + sprite
-- decals kit (hazard, corners, brackets, pips, accent bar)
+- decals kit
 - backgrounds patterns
 - components/utilities.css
 - examples: ui-panel, slide

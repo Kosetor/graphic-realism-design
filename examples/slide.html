@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MGR Example — Slide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../tokens/tokens.css" />
   <style>
     * { box-sizing: border-box; }
@@ -14,9 +17,10 @@
       place-items: center;
       background: #111;
       font-family: var(--mgr-font-ui);
+      padding: 16px;
     }
     .slide {
-      width: min(960px, 100vw);
+      width: min(960px, 100vw - 32px);
       aspect-ratio: 16 / 9;
       background: var(--mgr-bg-void);
       color: var(--mgr-ink-on-dark);
@@ -25,6 +29,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45);
     }
     .top {
       display: flex;
@@ -66,6 +71,7 @@
       margin-bottom: 40px;
       list-style: none;
       padding: 0;
+      flex-wrap: wrap;
     }
     .points li {
       font-size: 14px;
@@ -82,6 +88,7 @@
       width: 8px;
       height: 8px;
       background: var(--mgr-accent-volt);
+      flex-shrink: 0;
     }
     .hazard {
       height: 12px;
@@ -94,7 +101,7 @@
     }
     .corners {
       position: absolute;
-      inset: 16px;
+      inset: 16px 16px 28px 16px;
       pointer-events: none;
       color: var(--mgr-ink-faint);
     }
@@ -102,11 +109,11 @@
 </head>
 <body>
   <article class="slide" aria-label="Sample slide">
-    <svg class="corners" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="0.6">
-      <path d="M0 12V0h12" vector-effect="non-scaling-stroke"/>
-      <path d="M88 0h12v12" vector-effect="non-scaling-stroke"/>
-      <path d="M0 88v12h12" vector-effect="non-scaling-stroke"/>
-      <path d="M88 100h12v-12" vector-effect="non-scaling-stroke"/>
+    <svg class="corners" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+      <path d="M0 10V0h10" vector-effect="non-scaling-stroke"/>
+      <path d="M90 0h10v10" vector-effect="non-scaling-stroke"/>
+      <path d="M0 90v10h10" vector-effect="non-scaling-stroke"/>
+      <path d="M90 100h10v-10" vector-effect="non-scaling-stroke"/>
     </svg>
     <div class="top">
       <div class="label">Graphic Realism</div>

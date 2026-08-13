@@ -1,6 +1,7 @@
 /* Graphic Realism utilities — requires tokens/tokens.css */
 
 .mgr-panel {
+  position: relative;
   background: var(--mgr-bg-panel);
   border: var(--mgr-border) solid var(--mgr-line);
   border-radius: var(--mgr-radius-sm);
@@ -12,6 +13,55 @@
   background: var(--mgr-bg-white);
   color: var(--mgr-ink-primary);
   border-color: var(--mgr-line-on-light);
+}
+
+/* Corner cut: clip-path + inset shadow so the edge stays clean (no torn border) */
+.mgr-clip-corner {
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 1px var(--mgr-line);
+}
+
+.mgr-panel--light.mgr-clip-corner {
+  box-shadow: inset 0 0 0 1px var(--mgr-line-on-light);
+}
+
+/* Accent bars combine with optional corner chrome via layered inset shadows */
+.mgr-accent-bar {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-signal),
+    inset 0 0 0 1px var(--mgr-line);
+}
+
+.mgr-accent-bar--volt {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-volt),
+    inset 0 0 0 1px var(--mgr-line);
+}
+
+.mgr-accent-bar--cyan {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-cyan),
+    inset 0 0 0 1px var(--mgr-line);
+}
+
+.mgr-clip-corner.mgr-accent-bar {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-signal),
+    inset 0 0 0 1px var(--mgr-line);
+}
+
+.mgr-clip-corner.mgr-accent-bar--volt {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-volt),
+    inset 0 0 0 1px var(--mgr-line);
+}
+
+.mgr-clip-corner.mgr-accent-bar--cyan {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-cyan),
+    inset 0 0 0 1px var(--mgr-line);
 }
 
 .mgr-panel__label {
@@ -65,7 +115,8 @@
   transition:
     background var(--mgr-dur-fast) var(--mgr-ease),
     color var(--mgr-dur-fast) var(--mgr-ease),
-    border-color var(--mgr-dur-fast) var(--mgr-ease);
+    border-color var(--mgr-dur-fast) var(--mgr-ease),
+    filter var(--mgr-dur-fast) var(--mgr-ease);
 }
 
 .mgr-btn:focus-visible {
@@ -89,22 +140,14 @@
   border: var(--mgr-border-strong) solid var(--mgr-line-strong);
 }
 
+.mgr-btn--secondary:hover {
+  border-color: var(--mgr-ink-muted);
+}
+
 .mgr-btn--danger {
   background: var(--mgr-accent-signal);
   color: var(--mgr-ink-on-dark);
   border: var(--mgr-border-strong) solid var(--mgr-accent-signal);
-}
-
-.mgr-accent-bar {
-  box-shadow: inset 4px 0 0 0 var(--mgr-accent-signal);
-}
-
-.mgr-accent-bar--volt {
-  box-shadow: inset 4px 0 0 0 var(--mgr-accent-volt);
-}
-
-.mgr-accent-bar--cyan {
-  box-shadow: inset 4px 0 0 0 var(--mgr-accent-cyan);
 }
 
 .mgr-hazard-bar {
@@ -114,10 +157,6 @@
     var(--mgr-hazard-a) 0 8px,
     var(--mgr-hazard-b) 8px 16px
   );
-}
-
-.mgr-clip-corner {
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
 }
 
 .mgr-telem {
@@ -157,4 +196,14 @@
 .mgr-chip--ready {
   border-color: var(--mgr-accent-volt);
   color: var(--mgr-accent-volt);
+}
+
+/* Chips on light surfaces */
+.mgr-panel--light .mgr-chip {
+  border-color: var(--mgr-line-on-light);
+  color: var(--mgr-ink-faint);
+}
+
+.mgr-panel--light .mgr-body {
+  color: var(--mgr-ink-faint);
 }

@@ -6,7 +6,14 @@
 > Вдохновлено визуальным языком Graphic Realism (Bungie Marathon art direction).
 > Это **original** система — без копирования IP Bungie / Marathon.
 
-**Repo:** https://github.com/Kosetor/graphic-realism-design
+**Repo:** https://github.com/Kosetor/graphic-realism-design  
+**Live demo:** https://kosetor.github.io/graphic-realism-design/
+
+| Demo | URL |
+|------|-----|
+| Index | https://kosetor.github.io/graphic-realism-design/ |
+| UI Panel | https://kosetor.github.io/graphic-realism-design/ui-panel.html |
+| Slide | https://kosetor.github.io/graphic-realism-design/slide.html |
 
 ---
 
@@ -41,21 +48,27 @@ graphic-realism-design/
 ├── decals/               # hazard, corners, brackets, marks
 ├── backgrounds/          # паттерны и фоны SVG
 ├── components/           # CSS-утилиты и примитивы
-├── examples/             # живые HTML-примеры
+├── examples/             # HTML-примеры (+ self-contained/)
+├── docs/                 # GitHub Pages live demo
 └── third_party/          # лицензии upstream-паков
 ```
 
-| Путь | Назначение |
-|------|------------|
-| `SKILL.md` | Главный skill для агента |
-| `tokens/` | Цвета, типографика, spacing, motion |
-| `icons/` | UI-иконки 24×24 SVG |
-| `decals/` | Декоративные/структурные SVG |
-| `backgrounds/` | Бесшовные паттерны |
-| `agents/ui.md` | Как собирать интерфейсы |
-| `agents/slides.md` | Как собирать слайды |
-| `agents/graphics.md` | Постеры, обложки, графика |
-| `examples/` | Референс-разметка |
+---
+
+## Примеры локально
+
+```bash
+git clone https://github.com/Kosetor/graphic-realism-design.git
+cd graphic-realism-design
+
+# modular
+open examples/ui-panel.html
+open examples/slide.html
+
+# single-file (CSS inlined)
+open examples/self-contained/ui-panel.html
+open examples/self-contained/slide.html
+```
 
 ---
 
@@ -87,25 +100,11 @@ graphic-realism-design/
 
 ---
 
-## Иконки и декали
+## GitHub Pages
 
-- База: original set в `icons/` + `decals/`
-- Рекомендуемые upstream (MIT): [Phosphor](https://phosphoricons.com/), [Tabler](https://tabler.io/icons), [Lucide](https://lucide.dev/)
-- Правила адаптации: `icons/README.md`
-- Лицензии third-party: `third_party/NOTICE.md`
+Сайт собирается из папки `docs/` workflow’ом [`.github/workflows/pages.yml`](./.github/workflows/pages.yml).
 
----
-
-## Обновление системы
-
-Репозиторий рассчитан на эволюцию фирменного стиля:
-
-1. Меняй токены → все агенты подхватывают новый look.
-2. Добавляй SVG в `icons/`, `decals/`, `backgrounds/`.
-3. Расширяй `agents/*.md` новыми сценариями.
-4. Версионируй breaking changes в `CHANGELOG.md`.
-
-См. [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+Если Pages ещё не активен: **Settings → Pages → Source: GitHub Actions** (один раз).
 
 ---
 
@@ -113,11 +112,3 @@ graphic-realism-design/
 
 - Код и original SVG: **MIT** (см. [`LICENSE`](./LICENSE))
 - Не копировать ассеты / UI / брендинг Bungie, Marathon, Kurppa Hosk
-- Upstream-иконки — по их лицензиям (MIT / CC BY и т.д.)
-
----
-
-## Связанные материалы
-
-- Философия: Graphic Realism (Joseph Cross / Marathon art direction) — как **вдохновение**
-- Структура skill-репо: по образцу agent design kits (SKILL.md + tokens + examples)

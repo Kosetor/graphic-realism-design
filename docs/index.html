@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graphic Realism Design — Live Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --void: #0b0c0e; --panel: #1a1d24; --ink: #f4f5f7; --muted: #8b919c;
+  --line: #2e3440; --volt: #c8f542; --cyan: #3de0ff;
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; background: var(--void); color: var(--ink);
+  font-family: var(--font-ui); padding: 48px 24px 64px;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+.label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 8px;
+}
+h1 {
+  font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px);
+  letter-spacing: 0.04em; margin: 0 0 12px; line-height: 1.15;
+}
+h1 span { color: var(--volt); }
+.lead { color: var(--muted); font-size: 16px; line-height: 1.5; margin: 0 0 32px; max-width: 40ch; }
+.meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-bottom: 40px; }
+.grid { display: grid; gap: 16px; }
+@media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+a.card {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--line);
+  padding: 20px; transition: border-color 120ms ease;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  box-shadow: inset 4px 0 0 0 var(--volt), inset 0 0 0 1px var(--line);
+}
+a.card:hover { border-color: var(--muted); }
+a.card h2 {
+  font-family: var(--font-display); font-size: 20px; margin: 0 0 8px;
+}
+a.card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.4; }
+a.card .go {
+  display: inline-block; margin-top: 16px; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--volt);
+}
+.hazard {
+  height: 10px; margin: 48px 0 24px;
+  background: repeating-linear-gradient(45deg, #0b0c0e 0 8px, #f5c400 8px 16px);
+}
+.links { font-size: 13px; color: var(--muted); }
+.links a { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="label">Kosetor · Design System</p>
+    <h1>Graphic Realism <span>Live Demo</span></h1>
+    <p class="lead">UI, slides and tokens for AI agents. Open an example below.</p>
+    <p class="meta">github.com/Kosetor/graphic-realism-design · v1.0.1</p>
+    <div class="grid">
+      <a class="card" href="./ui-panel.html">
+        <h2>UI Panel</h2>
+        <p>Ops console: panels, telemetry, CTA, hazard chrome.</p>
+        <span class="go">Open →</span>
+      </a>
+      <a class="card" href="./slide.html">
+        <h2>Slide 16:9</h2>
+        <p>Presentation frame with corners, display type, accent.</p>
+        <span class="go">Open →</span>
+      </a>
+    </div>
+    <div class="hazard" role="presentation"></div>
+    <p class="links">
+      Source: <a href="https://github.com/Kosetor/graphic-realism-design">repository</a>
+      · Skill: <a href="https://github.com/Kosetor/graphic-realism-design/blob/main/SKILL.md">SKILL.md</a>
+    </p>
+  </div>
+</body>
+</html>

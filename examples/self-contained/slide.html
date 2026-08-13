@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MGR — Slide (self-contained)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --mgr-bg-void: #0b0c0e;
+  --mgr-ink-on-dark: #f4f5f7;
+  --mgr-ink-muted: #8b919c;
+  --mgr-ink-faint: #5a606c;
+  --mgr-accent-volt: #c8f542;
+  --mgr-hazard-a: #0b0c0e;
+  --mgr-hazard-b: #f5c400;
+  --mgr-font-ui: "Inter", system-ui, sans-serif;
+  --mgr-font-display: "Space Grotesk", system-ui, sans-serif;
+  --mgr-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --mgr-fs-sm: 12px;
+  --mgr-track-display: 0.04em;
+  --mgr-track-label: 0.08em;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: grid; place-items: center;
+  background: #111; font-family: var(--mgr-font-ui); padding: 16px;
+}
+.slide {
+  width: min(960px, 100vw - 32px); aspect-ratio: 16 / 9;
+  background: var(--mgr-bg-void); color: var(--mgr-ink-on-dark);
+  padding: 48px 56px 0; position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,.45);
+}
+.top { display: flex; justify-content: space-between; align-items: center; }
+.label {
+  font-size: var(--mgr-fs-sm); font-weight: 600;
+  letter-spacing: var(--mgr-track-label); text-transform: uppercase;
+  color: var(--mgr-ink-muted);
+}
+.idx { font-family: var(--mgr-font-mono); font-size: var(--mgr-fs-sm); color: var(--mgr-ink-muted); }
+h1 {
+  font-family: var(--mgr-font-display);
+  font-size: clamp(32px, 5vw, 52px); line-height: 1.1;
+  letter-spacing: var(--mgr-track-display); margin: 36px 0 16px; max-width: 14ch;
+}
+h1 span { color: var(--mgr-accent-volt); }
+.body {
+  font-size: clamp(16px, 2vw, 22px); color: var(--mgr-ink-muted);
+  max-width: 32ch; line-height: 1.4; margin: 0;
+}
+.points {
+  display: flex; gap: 24px; margin-top: auto; margin-bottom: 40px;
+  list-style: none; padding: 0; flex-wrap: wrap;
+}
+.points li {
+  font-size: 14px; font-weight: 600; letter-spacing: var(--mgr-track-label);
+  text-transform: uppercase; color: var(--mgr-ink-on-dark);
+  display: flex; align-items: center; gap: 8px;
+}
+.points li::before {
+  content: ""; width: 8px; height: 8px; background: var(--mgr-accent-volt); flex-shrink: 0;
+}
+.hazard {
+  height: 12px; margin: 0 -56px;
+  background: repeating-linear-gradient(45deg, var(--mgr-hazard-a) 0 8px, var(--mgr-hazard-b) 8px 16px);
+}
+.corners {
+  position: absolute; inset: 16px 16px 28px 16px;
+  pointer-events: none; color: var(--mgr-ink-faint);
+}
+  </style>
+</head>
+<body>
+  <article class="slide" aria-label="Sample slide">
+    <svg class="corners" viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+      <path d="M0 10V0h10" vector-effect="non-scaling-stroke"/>
+      <path d="M90 0h10v10" vector-effect="non-scaling-stroke"/>
+      <path d="M0 90v10h10" vector-effect="non-scaling-stroke"/>
+      <path d="M90 100h10v-10" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="top">
+      <div class="label">Graphic Realism</div>
+      <div class="idx">03 / 12</div>
+    </div>
+    <h1>Build interfaces with <span>signal clarity</span></h1>
+    <p class="body">One idea per slide. Limited materials. Color as function.</p>
+    <ul class="points">
+      <li>Tokens</li>
+      <li>Icons</li>
+      <li>Decals</li>
+    </ul>
+    <div class="hazard" role="presentation"></div>
+  </article>
+</body>
+</html>

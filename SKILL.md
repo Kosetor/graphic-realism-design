@@ -4,9 +4,10 @@ description: >
   Apply the Graphic Realism design system for UI, slides, and graphics.
   Use when the user asks for interfaces, dashboards, HUDs, presentations,
   posters, icons, or any visual work in the Graphic Realism / MGR style.
-version: 1.0.0
+version: 1.0.1
 license: MIT
 repository: https://github.com/Kosetor/graphic-realism-design
+demo: https://kosetor.github.io/graphic-realism-design/
 ---
 
 # SKILL: Graphic Realism Design System
@@ -25,84 +26,31 @@ repository: https://github.com/Kosetor/graphic-realism-design
 
 1. Этот файл (`SKILL.md`)
 2. `tokens/tokens.css` (или `tokens/tokens.json`)
-3. `rules.md` (краткий чеклист)
-4. Сценарий:
-   - UI → `agents/ui.md`
-   - Слайды → `agents/slides.md`
-   - Графика → `agents/graphics.md`
+3. `rules.md`
+4. Сценарий: `agents/ui.md` | `agents/slides.md` | `agents/graphics.md`
 5. При необходимости: `design-rules.md`, `DESIGN.md`
 6. Ассеты: `icons/`, `decals/`, `backgrounds/`, `components/`
-
-## Суть стиля
-
-**Graphic Realism** = упрощённый плакатный дизайн-язык + выразительный цвет
-+ ограниченные материалы **И** реалистичные пропорции, инженерная логика, читаемость.
-
-| Делай | Не делай |
-|-------|----------|
-| 1–2 акцента на экран | Неон на всём |
-| Hairline panels, accent bar | Glassmorphism + blur stack |
-| CAPS labels + mono data | 4+ шрифтовых стиля (fontslop) |
-| Geometric bold icons 24 grid | Thin doodle / 3D isometric mix |
-| Иерархия > декор | Копировать IP Bungie/Marathon |
+7. Референс: https://kosetor.github.io/graphic-realism-design/
 
 ## Design tokens (минимум)
 
 ```text
 Surfaces:  void #0B0C0E | panel #1A1D24 | white #E8EAEF
 Accents:   signal #FF3B4A | volt #C8F542 | cyan #3DE0FF | amber #FFB020
-Type:      UI Inter/Plex Sans | Display Space Grotesk/Chakra Petch | Mono IBM Plex Mono
+Type:      UI Inter | Display Space Grotesk | Mono IBM Plex Mono
 Radius:    2–4px (max 8px cards)
 Icon:      24×24, stroke 1.75, square cap, miter join, currentColor
-Space:     4/8/12/16/24/32/48
-Motion:    120–280ms, ease cubic-bezier(0.2, 0.8, 0.2, 1)
+Corner:    clip-path + inset box-shadow (see utilities.css)
 ```
-
-Полные токены: `tokens/tokens.css`.
-
-## Ассеты
-
-| Папка | Использование |
-|-------|----------------|
-| `icons/outline/` | Default UI icons |
-| `icons/solid/` | Active / selected |
-| `icons/sprite.svg` | SVG symbol sprite |
-| `decals/` | Hazard, corners, brackets, pips |
-| `backgrounds/` | Subtle patterns (opacity ≤ 8%) |
-| `components/utilities.css` | Готовые utility-классы |
-
-Если нужной иконки нет — создай original SVG по `icons/README.md` (grid 24, stroke 1.75).
-Можно адаптировать Phosphor Bold / Tabler / Lucide → привести к MGR rules.
 
 ## Формат ответа агента
 
-1. **Intent** — экран/носитель
-2. **Tokens used**
-3. **Layout** (ASCII wireframe)
-4. **SVG** (icons/decals) — inline или пути из repo
-5. **HTML/CSS или React/Vue**
-6. **A11y** — contrast, focus, labels
-7. **Sources** — файлы repo + license upstream
+1. Intent · 2. Tokens · 3. Layout · 4. SVG · 5. Code · 6. A11y · 7. Sources
 
 ## Жёсткие запреты
 
-- Копировать UI, ассеты, логотипы, faction marks Bungie / Marathon / Kurppa Hosk
-- Выдавать чужие brand marks за original
-- Primary UI с glitch/scanline/noise > 6% opacity
-- Более одного primary CTA на view без причины
+- Копировать UI/ассеты Bungie / Marathon / Kurppa Hosk
+- Primary UI с glitch/noise > 6%
+- >1 primary CTA без причины
 
-## One-shot prompt
-
-```text
-Примени Graphic Realism (github.com/Kosetor/graphic-realism-design).
-SKILL.md + tokens/tokens.css + agents/<ui|slides|graphics>.md
-Задача: ...
-Стек: HTML/CSS | React | Vue | SVG
-Выдай полный артефакт + rationale.
-```
-
-## Версионирование
-
-- `version` в frontmatter этого файла = skill API version
-- Breaking token changes → bump minor/major + `CHANGELOG.md`
-- Агенты всегда тянут `main` unless pinned to tag
+version: 1.0.1

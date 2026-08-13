@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MGR Example — UI Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../tokens/tokens.css" />
   <link rel="stylesheet" href="../components/utilities.css" />
   <style>
@@ -31,9 +34,21 @@
       gap: var(--mgr-space-4);
       margin: var(--mgr-space-4) 0;
     }
-    .icon { width: 20px; height: 20px; display: inline-block; }
-    h1 { font-family: var(--mgr-font-display); font-size: var(--mgr-fs-2xl); margin: 0 0 var(--mgr-space-2); }
-    .meta { font-family: var(--mgr-font-mono); color: var(--mgr-ink-muted); font-size: var(--mgr-fs-sm); }
+    .icon { width: 20px; height: 20px; display: inline-block; flex-shrink: 0; }
+    h1 {
+      font-family: var(--mgr-font-display);
+      font-size: var(--mgr-fs-2xl);
+      margin: 0 0 var(--mgr-space-2);
+      letter-spacing: var(--mgr-track-display);
+    }
+    .meta {
+      font-family: var(--mgr-font-mono);
+      color: var(--mgr-ink-muted);
+      font-size: var(--mgr-fs-sm);
+    }
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -67,18 +82,18 @@
       </div>
       <div class="mgr-progress" aria-hidden="true"><span style="width:62%"></span></div>
       <div class="row" style="margin-top: var(--mgr-space-4);">
-        <button class="mgr-btn mgr-btn--primary">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 19V7"/><path d="M7 12l5-5 5 5"/><path d="M5 19h14"/></svg>
+        <button class="mgr-btn mgr-btn--primary" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19V7"/><path d="M7 12l5-5 5 5"/><path d="M5 19h14"/></svg>
           Deploy
         </button>
-        <button class="mgr-btn mgr-btn--secondary">Cancel</button>
+        <button class="mgr-btn mgr-btn--secondary" type="button">Cancel</button>
       </div>
     </section>
 
     <section class="mgr-panel mgr-panel--light">
       <div class="mgr-panel__label">Brief</div>
-      <h2 class="mgr-title" style="color: var(--mgr-ink-primary);">Light panel</h2>
-      <p class="mgr-body" style="color: var(--mgr-ink-faint);">Colonial white surface on void canvas — signature contrast move.</p>
+      <h2 class="mgr-title">Light panel</h2>
+      <p class="mgr-body">Colonial white surface on void canvas — signature contrast move.</p>
       <div class="row" style="margin-top: var(--mgr-space-4);">
         <span class="mgr-chip">UI</span>
         <span class="mgr-chip">Slides</span>

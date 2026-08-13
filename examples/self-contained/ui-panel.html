@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MGR — UI Panel (self-contained)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --mgr-bg-void: #0b0c0e;
+  --mgr-bg-base: #12141a;
+  --mgr-bg-panel: #1a1d24;
+  --mgr-bg-elevated: #242832;
+  --mgr-bg-white: #e8eaef;
+  --mgr-ink-primary: #0b0c0e;
+  --mgr-ink-on-dark: #f4f5f7;
+  --mgr-ink-muted: #8b919c;
+  --mgr-ink-faint: #5a606c;
+  --mgr-line: #2e3440;
+  --mgr-line-strong: #4a5160;
+  --mgr-line-on-light: #c5c9d2;
+  --mgr-accent-signal: #ff3b4a;
+  --mgr-accent-volt: #c8f542;
+  --mgr-accent-cyan: #3de0ff;
+  --mgr-hazard-a: #0b0c0e;
+  --mgr-hazard-b: #f5c400;
+  --mgr-font-ui: "Inter", system-ui, sans-serif;
+  --mgr-font-display: "Space Grotesk", system-ui, sans-serif;
+  --mgr-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --mgr-fs-xs: 11px; --mgr-fs-sm: 12px; --mgr-fs-md: 14px;
+  --mgr-fs-xl: 20px; --mgr-fs-2xl: 28px;
+  --mgr-lh-tight: 1.15; --mgr-lh-body: 1.5;
+  --mgr-track-display: 0.04em; --mgr-track-label: 0.08em;
+  --mgr-space-1: 4px; --mgr-space-2: 8px; --mgr-space-3: 12px;
+  --mgr-space-4: 16px; --mgr-space-6: 32px;
+  --mgr-radius-sm: 2px; --mgr-radius-pill: 999px;
+  --mgr-border: 1px; --mgr-border-strong: 2px;
+  --mgr-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --mgr-dur-fast: 120ms;
+}
+.mgr-panel {
+  position: relative;
+  background: var(--mgr-bg-panel);
+  border: var(--mgr-border) solid var(--mgr-line);
+  border-radius: var(--mgr-radius-sm);
+  color: var(--mgr-ink-on-dark);
+  padding: var(--mgr-space-4);
+}
+.mgr-panel--light {
+  background: var(--mgr-bg-white);
+  color: var(--mgr-ink-primary);
+  border-color: var(--mgr-line-on-light);
+}
+.mgr-clip-corner {
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 1px var(--mgr-line);
+}
+.mgr-clip-corner.mgr-accent-bar--volt {
+  box-shadow:
+    inset 4px 0 0 0 var(--mgr-accent-volt),
+    inset 0 0 0 1px var(--mgr-line);
+}
+.mgr-panel__label {
+  font-family: var(--mgr-font-ui);
+  font-size: var(--mgr-fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--mgr-track-label);
+  text-transform: uppercase;
+  color: var(--mgr-ink-muted);
+  margin: 0 0 var(--mgr-space-2);
+}
+.mgr-title {
+  font-family: var(--mgr-font-display);
+  font-size: var(--mgr-fs-xl);
+  font-weight: 700;
+  line-height: var(--mgr-lh-tight);
+  letter-spacing: var(--mgr-track-display);
+  margin: 0 0 var(--mgr-space-3);
+}
+.mgr-body {
+  font-family: var(--mgr-font-ui);
+  font-size: var(--mgr-fs-md);
+  line-height: var(--mgr-lh-body);
+  color: var(--mgr-ink-muted);
+  margin: 0;
+}
+.mgr-panel--light .mgr-body { color: var(--mgr-ink-faint); }
+.mgr-mono {
+  font-family: var(--mgr-font-mono);
+  font-size: var(--mgr-fs-md);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.mgr-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--mgr-space-2); min-height: 40px; padding: 0 var(--mgr-space-4);
+  border-radius: var(--mgr-radius-sm); font-family: var(--mgr-font-ui);
+  font-size: var(--mgr-fs-sm); font-weight: 700;
+  letter-spacing: var(--mgr-track-label); text-transform: uppercase;
+  cursor: pointer;
+  transition: filter var(--mgr-dur-fast) var(--mgr-ease), border-color var(--mgr-dur-fast) var(--mgr-ease);
+}
+.mgr-btn:focus-visible { outline: 2px solid var(--mgr-accent-cyan); outline-offset: 2px; }
+.mgr-btn--primary {
+  background: var(--mgr-accent-volt); color: var(--mgr-ink-primary);
+  border: var(--mgr-border-strong) solid var(--mgr-accent-volt);
+}
+.mgr-btn--primary:hover { filter: brightness(1.05); }
+.mgr-btn--secondary {
+  background: transparent; color: var(--mgr-ink-on-dark);
+  border: var(--mgr-border-strong) solid var(--mgr-line-strong);
+}
+.mgr-hazard-bar {
+  height: 12px;
+  background: repeating-linear-gradient(45deg, var(--mgr-hazard-a) 0 8px, var(--mgr-hazard-b) 8px 16px);
+}
+.mgr-telem { display: flex; flex-direction: column; gap: var(--mgr-space-1); }
+.mgr-progress {
+  height: 6px; background: var(--mgr-bg-elevated); overflow: hidden;
+}
+.mgr-progress > span { display: block; height: 100%; background: var(--mgr-accent-cyan); }
+.mgr-chip {
+  display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px;
+  border-radius: var(--mgr-radius-pill); border: 1px solid var(--mgr-line-strong);
+  font-size: var(--mgr-fs-xs); font-weight: 600;
+  letter-spacing: var(--mgr-track-label); text-transform: uppercase;
+  color: var(--mgr-ink-muted);
+}
+.mgr-chip--ready { border-color: var(--mgr-accent-volt); color: var(--mgr-accent-volt); }
+.mgr-panel--light .mgr-chip {
+  border-color: var(--mgr-line-on-light); color: var(--mgr-ink-faint);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; font-family: var(--mgr-font-ui);
+  background: var(--mgr-bg-void); color: var(--mgr-ink-on-dark);
+  padding: var(--mgr-space-6);
+}
+.layout {
+  max-width: 960px; margin: 0 auto; display: grid;
+  gap: var(--mgr-space-4); grid-template-columns: 1.2fr 1fr;
+}
+.span-2 { grid-column: 1 / -1; }
+.row { display: flex; gap: var(--mgr-space-3); flex-wrap: wrap; align-items: center; }
+.grid-telem {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--mgr-space-4); margin: var(--mgr-space-4) 0;
+}
+.icon { width: 20px; height: 20px; flex-shrink: 0; }
+h1 {
+  font-family: var(--mgr-font-display); font-size: var(--mgr-fs-2xl);
+  margin: 0 0 var(--mgr-space-2); letter-spacing: var(--mgr-track-display);
+}
+.meta { font-family: var(--mgr-font-mono); color: var(--mgr-ink-muted); font-size: var(--mgr-fs-sm); }
+@media (max-width: 720px) { .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <header class="span-2 row" style="justify-content: space-between;">
+      <div>
+        <div class="mgr-panel__label">Operations</div>
+        <h1>Agent console</h1>
+        <div class="meta">NODE // KST-01 · BUILD 1.0.0</div>
+      </div>
+      <span class="mgr-chip mgr-chip--ready">Ready</span>
+    </header>
+    <section class="mgr-panel mgr-accent-bar--volt mgr-clip-corner">
+      <div class="mgr-panel__label">Deploy queue</div>
+      <h2 class="mgr-title">Hermes runtime</h2>
+      <p class="mgr-body">Graphic Realism panel with volt accent, mono telemetry, and primary CTA.</p>
+      <div class="grid-telem">
+        <div class="mgr-telem">
+          <span class="mgr-panel__label">Latency</span>
+          <span class="mgr-mono" style="color: var(--mgr-accent-cyan);">42ms</span>
+        </div>
+        <div class="mgr-telem">
+          <span class="mgr-panel__label">Load</span>
+          <span class="mgr-mono">62%</span>
+        </div>
+        <div class="mgr-telem">
+          <span class="mgr-panel__label">Uptime</span>
+          <span class="mgr-mono">14h 02m</span>
+        </div>
+      </div>
+      <div class="mgr-progress" aria-hidden="true"><span style="width:62%"></span></div>
+      <div class="row" style="margin-top: var(--mgr-space-4);">
+        <button class="mgr-btn mgr-btn--primary" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M12 19V7"/><path d="M7 12l5-5 5 5"/><path d="M5 19h14"/></svg>
+          Deploy
+        </button>
+        <button class="mgr-btn mgr-btn--secondary" type="button">Cancel</button>
+      </div>
+    </section>
+    <section class="mgr-panel mgr-panel--light">
+      <div class="mgr-panel__label">Brief</div>
+      <h2 class="mgr-title">Light panel</h2>
+      <p class="mgr-body">Colonial white surface on void canvas — signature contrast move.</p>
+      <div class="row" style="margin-top: var(--mgr-space-4);">
+        <span class="mgr-chip">UI</span>
+        <span class="mgr-chip">Slides</span>
+        <span class="mgr-chip">Graphics</span>
+      </div>
+    </section>
+    <div class="span-2 mgr-hazard-bar" role="presentation"></div>
+  </div>
+</body>
+</html>
