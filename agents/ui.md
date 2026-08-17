@@ -2,77 +2,94 @@
 
 ## Goal
 
-Собрать интерфейс (dashboard, panel, HUD, settings, agent console) в Graphic Realism.
+Build interfaces—dashboards, panels, HUDs, settings, agent consoles—in product-ready Graphic Realism.
+
+For Personal OS / PWA / agent dashboards, use the deeper scenario: [`personal-os.md`](./personal-os.md).
 
 ## Read first
 
-`SKILL.md` → `tokens/tokens.css` → `rules.md` → this file → `components/utilities.css` → `icons/` + `decals/`
+`SKILL.md` → `tokens/tokens.css` → `rules.md` → this file → `icons/mgr-geometry/manifest.json`.
+
+For app shells also read: `tokens/personal-os.css`, `components/shell.css`, `components/agent-console.css`.
 
 ## Layout grammar
 
+```text
+┌ void/base canvas ──────────────────────────────────────────────────────┐
+│ [SECTION LABEL]                    AGENT STATE · meta · primary CTA     │
+│ ┌ panel: MGR mark + title + body ┐ ┌ panel: telemetry / queue ───────┐ │
+│ │  one mark, low-opacity chrome  │ │ READY · 42ms · 62% · status      │ │
+│ │  meaningful content             │ │ [one contextual action]          │ │
+│ └─────────────────────────────────┘ └─────────────────────────────────┘ │
+│ status strip / hazard only if semantically meaningful                    │
+└────────────────────────────────────────────────────────────────────────┘
 ```
-┌ void canvas ─────────────────────────────────────────┐
-│  [LABEL]                              meta mono      │
-│  ┌ panel ──────────────┐  ┌ panel ────────────────┐  │
-│  │ accent│ title       │  │ telemetry grid        │  │
-│  │ bar   │ body        │  │ 12.4  READY           │  │
-│  │       │ [CTA]       │  │ ████░░ 62%            │  │
-│  └─────────────────────┘  └───────────────────────┘  │
-│  hazard strip (optional, 8–12px)                     │
-└──────────────────────────────────────────────────────┘
-```
 
-## Build steps
+## Build order
 
-1. Canvas = `--mgr-bg-void`
-2. Panels = `--mgr-bg-panel` or light `--mgr-bg-white`
-3. One accent language per view (volt OR signal primary)
-4. Header labels CAPS xs muted
-5. Numbers mono
-6. Icons from `icons/outline` (default) / `solid` (active)
-7. Decals: accent-bar, corner-registration, hazard only as thin chrome
-8. Primary button: volt fill CAPS
-9. Secondary: outline
-10. Focus rings 2px accent
+1. Define intent, primary task and required states.
+2. Create Base: canvas, readable content, controls, data and Markdown/code regions.
+3. Add Chrome: 1px panels, CAPS labels, status strip, one MGR Geometry mark where it improves scanning.
+4. Add functional color: primary action (usually volt) + state reinforcement.
+5. Add FX only if it remains useful at 0% opacity.
+6. Define compact/mobile behavior and reduced-motion behavior.
 
-## Component recipes
+## MGR Geometry selection
+
+| UI need | First choice |
+|---|---|
+| System/workspace | `ic-cube-grid.svg` |
+| AI/model/state | `ic-atom.svg`, `ic-sun-rays.svg` |
+| Link/network | `ic-globe-grid.svg`, `ic-interwoven.svg` |
+| Current target | `ic-crosshair-square.svg` |
+| Success/verify | `ic-diamond-checker.svg` |
+| Queue/history | `ic-line-circles-v.svg`, `ic-bars.svg` |
+| Run/activate | `ic-lightning-bolts.svg` |
+| Error | `ic-alert-circle.svg` |
+| Divider | `ic-zigzag-band.svg` |
+
+Paths are relative to `icons/mgr-geometry/`.
+
+## Component rules
 
 ### Panel
+
+- Flat dark/light surface; 1px line; optional 4px accent bar.
+- One mark at title scale (32–48px) or background scale (48–104px at 4–8% opacity), not both by default.
+- Preserve long Markdown/code readability.
+
+### State presence
+
 ```html
-<section class="mgr-panel mgr-accent-bar">
-  <header class="mgr-panel__label">System</header>
-  <h2 class="mgr-title">Deploy queue</h2>
-  <p class="mgr-body">...</p>
-</section>
+<span class="mgr-agent-presence mgr-agent-presence--working">
+  <span class="mgr-agent-presence__dot" aria-hidden="true"></span>
+  Working
+</span>
 ```
 
-### Button row
-```html
-<button class="mgr-btn mgr-btn--primary">Deploy</button>
-<button class="mgr-btn mgr-btn--secondary">Cancel</button>
-```
+Use explicit label + color + diamond dot.
 
-### Telemetry cell
-```html
-<div class="mgr-telem">
-  <span class="mgr-panel__label">Latency</span>
-  <span class="mgr-mono">42ms</span>
-</div>
-```
+### Button
 
-## HUD rules
+- Primary: solid volt, CAPS, clear verb.
+- Secondary: outline.
+- One primary CTA per view.
+- No gradients and no oversized rounded corners.
 
-- Pin to corners, not center
-- Only critical: status, resource, objective, team
-- Alert color only when state ≠ nominal
+### Telemetry
+
+- Mono values; CAPS label; tabular numerals.
+- Cyan = data/link, not every number.
+- Use `bars` / `line-circles-*` as a contextual data mark, not decoration.
 
 ## Output
 
-Intent · Tokens · ASCII wire · HTML/CSS · SVG refs · A11y · Sources
+Intent → Shell map (if applicable) → Tokens/state map → MGR assets → ASCII wire → code → responsive → a11y → sources.
 
 ## Anti-patterns
 
-- Centered gamey clutter
-- Multiple competing CTAs
-- Glitch overlays on ops screens
-- Mixing thin & bold icon sets
+- Screenshot-only UI with no empty/error/offline states.
+- Decorative MGR symbols scattered across each card.
+- FX/grid/noise behind text, code or form fields.
+- Multiple competing primary CTAs.
+- Using MGR symbols plus a different decorative icon pack in the same focal panel.

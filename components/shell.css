@@ -1,0 +1,156 @@
+/* Agent-native Personal OS shell.
+   Requires: ../tokens/tokens.css + ../tokens/personal-os.css
+*/
+
+.mgr-app-shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: var(--mgr-nav-width) minmax(0, 1fr);
+  grid-template-rows: var(--mgr-topbar-height) minmax(0, 1fr) var(--mgr-statusbar-height);
+  grid-template-areas:
+    "topbar topbar"
+    "rail main"
+    "status status";
+  background: var(--mgr-shell-canvas);
+  color: var(--mgr-ink-on-dark);
+}
+
+.mgr-topbar {
+  grid-area: topbar;
+  position: sticky;
+  top: 0;
+  z-index: var(--mgr-shell-z-topbar);
+  display: flex;
+  align-items: center;
+  gap: var(--mgr-space-3);
+  min-height: var(--mgr-topbar-height);
+  padding: 0 var(--mgr-space-4);
+  background: var(--mgr-shell-surface);
+  border-bottom: 1px solid var(--mgr-shell-border);
+}
+
+.mgr-rail {
+  grid-area: rail;
+  min-width: 0;
+  padding: var(--mgr-space-3);
+  background: var(--mgr-nav-bg);
+  border-right: 1px solid var(--mgr-shell-border);
+  overflow-y: auto;
+}
+
+.mgr-main {
+  grid-area: main;
+  min-width: 0;
+  padding: var(--mgr-space-5);
+  overflow: auto;
+}
+
+.mgr-statusbar {
+  grid-area: status;
+  display: flex;
+  align-items: center;
+  gap: var(--mgr-space-3);
+  min-height: var(--mgr-statusbar-height);
+  padding: 0 var(--mgr-space-4);
+  background: var(--mgr-shell-surface);
+  border-top: 1px solid var(--mgr-shell-border);
+  color: var(--mgr-ink-muted);
+  font-family: var(--mgr-font-mono);
+  font-size: var(--mgr-fs-xs);
+}
+
+.mgr-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--mgr-space-2);
+  min-height: var(--mgr-touch-target);
+  padding: 0 var(--mgr-space-3);
+  color: var(--mgr-nav-idle-ink);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: var(--mgr-radius-sm);
+}
+
+.mgr-nav-item:hover {
+  background: var(--mgr-bg-panel);
+  color: var(--mgr-ink-on-dark);
+}
+
+.mgr-nav-item[aria-current="page"] {
+  background: var(--mgr-nav-active-bg);
+  border-left-color: var(--mgr-accent-volt);
+  color: var(--mgr-nav-active-ink);
+}
+
+.mgr-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--mgr-space-4);
+  margin-bottom: var(--mgr-space-5);
+}
+
+.mgr-section-header__meta {
+  font-family: var(--mgr-font-mono);
+  font-size: var(--mgr-fs-sm);
+  color: var(--mgr-ink-muted);
+}
+
+.mgr-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--mgr-space-4);
+}
+
+.mgr-workspace-grid > * { grid-column: span 4; }
+.mgr-workspace-grid > .mgr-span-6 { grid-column: span 6; }
+.mgr-workspace-grid > .mgr-span-8 { grid-column: span 8; }
+.mgr-workspace-grid > .mgr-span-12 { grid-column: 1 / -1; }
+
+.mgr-mark {
+  display: inline-grid;
+  place-items: center;
+  color: var(--mgr-ink-muted);
+  flex: 0 0 auto;
+}
+.mgr-mark--data { color: var(--mgr-accent-cyan); }
+.mgr-mark--ready { color: var(--mgr-accent-volt); }
+.mgr-mark--alert { color: var(--mgr-accent-signal); }
+.mgr-mark--muted { color: var(--mgr-ink-faint); opacity: .72; }
+
+.mgr-app-shell :focus-visible {
+  outline: 2px solid var(--mgr-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1199px) {
+  .mgr-app-shell { --mgr-nav-width: 72px; }
+  .mgr-rail .mgr-nav-label { display: none; }
+  .mgr-rail { padding: var(--mgr-space-2); }
+  .mgr-nav-item { justify-content: center; padding: 0; }
+}
+
+@media (max-width: 767px) {
+  .mgr-app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--mgr-topbar-height) minmax(0, 1fr) auto var(--mgr-statusbar-height);
+    grid-template-areas:
+      "topbar"
+      "main"
+      "rail"
+      "status";
+  }
+  .mgr-rail {
+    display: flex;
+    gap: var(--mgr-space-1);
+    border-right: 0;
+    border-top: 1px solid var(--mgr-shell-border);
+    overflow-x: auto;
+  }
+  .mgr-rail .mgr-nav-label { display: none; }
+  .mgr-nav-item { min-width: var(--mgr-touch-target); justify-content: center; }
+  .mgr-main { padding: var(--mgr-space-4); }
+  .mgr-section-header { align-items: flex-start; flex-direction: column; }
+  .mgr-workspace-grid { grid-template-columns: 1fr; }
+  .mgr-workspace-grid > * { grid-column: 1; }
+}

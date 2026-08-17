@@ -1,114 +1,112 @@
 # Graphic Realism Design System
 
-Открытая дизайн-система в эстетике **Graphic Realism** для AI-агентов.
-Создавай UI, слайды и графику в едином фирменном стиле.
+Open, agent-ready design system for **UI, Personal OS dashboards, slides and graphics** in the Graphic Realism style.
 
-> Вдохновлено визуальным языком Graphic Realism (Bungie Marathon art direction).
-> Это **original** система — без копирования IP Bungie / Marathon.
+> Product-first: geometric graphic language + engineering clarity + real agent-native states.
+> Original system only—do not copy Bungie/Marathon/Kurppa Hosk IP.
 
-**Repo:** https://github.com/Kosetor/graphic-realism-design  
+**Repository:** https://github.com/Kosetor/graphic-realism-design  
+**Product reference:** https://github.com/Kosetor/personal-os  
 **Live demo:** https://kosetor.github.io/graphic-realism-design/
 
-| Demo | URL |
-|------|-----|
-| Index | https://kosetor.github.io/graphic-realism-design/ |
-| UI Panel | https://kosetor.github.io/graphic-realism-design/ui-panel.html |
-| Slide | https://kosetor.github.io/graphic-realism-design/slide.html |
+## Start here
 
----
-
-## Для агента (быстрый старт)
-
-1. Прочитай [`SKILL.md`](./SKILL.md) — главная инструкция.
-2. Примени токены из [`tokens/tokens.css`](./tokens/tokens.css).
-3. Бери иконки / декали / фоны из папок ниже.
-4. Следуй [`design-rules.md`](./design-rules.md) и сценариям в [`agents/`](./agents/).
+1. Read [`SKILL.md`](./SKILL.md).
+2. Load [`tokens/tokens.css`](./tokens/tokens.css).
+3. For an app/PWA shell, also load [`tokens/personal-os.css`](./tokens/personal-os.css).
+4. Use [`icons/mgr-geometry/`](./icons/mgr-geometry/) as the primary visual icon/decal language.
+5. Pick the appropriate agent scenario in [`agents/`](./agents/).
 
 ```text
-Примени Graphic Realism из https://github.com/Kosetor/graphic-realism-design
-Прочитай SKILL.md и tokens/tokens.css.
-Задача: <UI | slides | graphics> — <описание>.
-Иконки: icons/ + decals/. Без копирования IP Bungie.
-Выдай: tokens used, layout, SVG/HTML/CSS, a11y notes.
+Apply Graphic Realism from github.com/Kosetor/graphic-realism-design.
+Use MGR Geometry Pack (icons/mgr-geometry/manifest.json) as primary icon language.
+For app shells read agents/personal-os.md + components/shell.css.
+Task: <UI | Personal OS | slides | graphics> — <description>.
+Return: intent, tokens/state map, MGR assets, layout, code, responsive and a11y notes.
 ```
 
----
+## Recommended icon pack
 
-## Структура
+### MGR Geometry Pack
+
+[`icons/mgr-geometry/`](./icons/mgr-geometry/) is the **recommended default pack** for this system.
+
+It contains **29 SVG** assets for:
+
+- workspace/system marks (`cube-grid`, `atom`, `circle-grid`)
+- network and integrations (`globe`, `globe-grid`, `interwoven`)
+- objectives and validation (`crosshair-square`, `diamond-*`)
+- signal/status (`alert-circle`, `lightning-bolts`, `sun-rays`, `star-8-circle`)
+- navigation/flow (`arrow-*`, `arrows-*`, `navigation`)
+- telemetry and chrome (`bars`, `line-circles-*`, `radial-square`, `zigzag-band`)
+
+See [`manifest.json`](./icons/mgr-geometry/manifest.json) and [`preview.md`](./icons/mgr-geometry/preview.md).
+
+Fallback for conventional tiny actions: Phosphor Bold / Tabler / Lucide only when an MGR semantic equivalent is absent.
+
+## System model
+
+```text
+Base    → content, controls, data, typography
+Chrome  → panels, labels, borders, corner cuts, MGR marks
+FX      → optional grid/hatch/noise/motion, never essential information
+```
+
+## Repository map
 
 ```text
 graphic-realism-design/
-├── SKILL.md              # entrypoint для агента
-├── DESIGN.md             # философия стиля
-├── design-rules.md       # полные правила
-├── rules.md              # краткий чеклист
-├── tokens/               # CSS + JSON design tokens
-├── agents/               # сценарии: UI / slides / graphics
-├── icons/                # SVG-иконки (outline / solid / sprite)
-├── decals/               # hazard, corners, brackets, marks
-├── backgrounds/          # паттерны и фоны SVG
-├── components/           # CSS-утилиты и примитивы
-├── examples/             # HTML-примеры (+ self-contained/)
-├── docs/                 # GitHub Pages live demo
-└── third_party/          # лицензии upstream-паков
+├── SKILL.md                     # agent entrypoint
+├── DESIGN.md                    # philosophy + product reference
+├── design-rules.md              # full design rules
+├── rules.md                     # delivery checklist
+├── tokens/
+│   ├── tokens.css               # base tokens
+│   └── personal-os.css          # agent/PWA shell semantic tokens
+├── agents/
+│   ├── ui.md                    # generic UI
+│   ├── personal-os.md           # agent-native shell scenario
+│   ├── slides.md
+│   └── graphics.md
+├── components/
+│   ├── utilities.css
+│   ├── shell.css                # topbar / rail / main / status
+│   └── agent-console.css        # state, queue, telemetry, Markdown
+├── icons/
+│   ├── mgr-geometry/            # recommended 29-SVG pack
+│   ├── outline/
+│   ├── solid/
+│   └── sprite.svg
+├── decals/                      # structural decals
+├── backgrounds/                 # subtle patterns
+├── examples/                    # modular + self-contained HTML
+└── docs/                        # GitHub Pages demo
 ```
 
----
+## Product-reference rules
 
-## Примеры локально
+`personal-os` is the reference for turning this language into a working app:
 
-```bash
-git clone https://github.com/Kosetor/graphic-realism-design.git
-cd graphic-realism-design
+- config-driven visual decisions
+- agent status/queue/activity as first-class UI
+- Markdown and code remain readable
+- responsive shell and 44px touch targets
+- empty/loading/error/offline states exist before FX polish
+- reduced-motion support
 
-# modular
-open examples/ui-panel.html
-open examples/slide.html
+Full scenario: [`agents/personal-os.md`](./agents/personal-os.md).
 
-# single-file (CSS inlined)
-open examples/self-contained/ui-panel.html
-open examples/self-contained/slide.html
-```
+## Principles
 
----
+- One primary action per view
+- Maximum two accents per view
+- CAPS labels + mono data
+- 2–4px radii, 1px hairline, sharp modular geometry
+- One strong MGR mark per panel/slide; decorative opacity 4–8%
+- State = label + color + mark; never color alone
+- Hierarchy over decoration
 
-## Принципы (1 экран)
+## License
 
-- **Graphic Realism** = плакатный язык + инженерная ясность
-- Максимум **2 акцента** на view + semantic states
-- Острые углы (2–4px), hairline 1px, accent bar 4px
-- CAPS labels + mono telemetry
-- Иконки: geometric bold outline, stroke 1.75, grid 24
-- Иерархия важнее декора (no fontslop)
-
-Подробнее: [`DESIGN.md`](./DESIGN.md)
-
----
-
-## Токены (фрагмент)
-
-```css
---mgr-bg-void:       #0B0C0E;
---mgr-bg-panel:      #1A1D24;
---mgr-bg-white:      #E8EAEF;
---mgr-accent-signal: #FF3B4A;
---mgr-accent-volt:   #C8F542;
---mgr-accent-cyan:   #3DE0FF;
-```
-
-Полный набор: [`tokens/tokens.css`](./tokens/tokens.css) · [`tokens/tokens.json`](./tokens/tokens.json)
-
----
-
-## GitHub Pages
-
-Сайт собирается из папки `docs/` workflow’ом [`.github/workflows/pages.yml`](./.github/workflows/pages.yml).
-
-Если Pages ещё не активен: **Settings → Pages → Source: GitHub Actions** (один раз).
-
----
-
-## Лицензия
-
-- Код и original SVG: **MIT** (см. [`LICENSE`](./LICENSE))
-- Не копировать ассеты / UI / брендинг Bungie, Marathon, Kurppa Hosk
+- Original code/docs/SVG: MIT—see [`LICENSE`](./LICENSE)
+- Verify provenance and licenses before redistributing imported MGR Geometry assets.

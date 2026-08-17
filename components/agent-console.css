@@ -1,0 +1,124 @@
+/* Agent-native console components.
+   Requires tokens + personal-os.css + shell.css.
+*/
+
+.mgr-agent-presence {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mgr-space-2);
+  min-height: 28px;
+  padding: 0 var(--mgr-space-2);
+  border: 1px solid var(--mgr-shell-border);
+  border-radius: var(--mgr-radius-pill);
+  font-size: var(--mgr-fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--mgr-track-label);
+  text-transform: uppercase;
+}
+
+.mgr-agent-presence__dot {
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+.mgr-agent-presence--ready { color: var(--mgr-state-ready); }
+.mgr-agent-presence--working { color: var(--mgr-state-working); }
+.mgr-agent-presence--queued { color: var(--mgr-state-queued); }
+.mgr-agent-presence--attention { color: var(--mgr-state-attention); }
+.mgr-agent-presence--error { color: var(--mgr-state-error); }
+.mgr-agent-presence--offline { color: var(--mgr-state-offline); }
+
+.mgr-task-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--mgr-space-3);
+  align-items: center;
+  min-height: var(--mgr-touch-target);
+  padding: var(--mgr-space-2) 0;
+  border-bottom: 1px solid var(--mgr-shell-border);
+}
+
+.mgr-task-row__title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mgr-task-row__meta {
+  color: var(--mgr-ink-muted);
+  font-family: var(--mgr-font-mono);
+  font-size: var(--mgr-fs-xs);
+}
+
+.mgr-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--mgr-space-3);
+}
+
+.mgr-telemetry {
+  min-height: 80px;
+  padding: var(--mgr-space-3);
+  background: var(--mgr-shell-surface);
+  border: 1px solid var(--mgr-shell-border);
+  border-radius: var(--mgr-radius-sm);
+}
+
+.mgr-telemetry__label {
+  display: block;
+  margin-bottom: var(--mgr-space-1);
+  color: var(--mgr-ink-muted);
+  font-size: var(--mgr-fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--mgr-track-label);
+  text-transform: uppercase;
+}
+
+.mgr-telemetry__value {
+  color: var(--mgr-ink-on-dark);
+  font-family: var(--mgr-font-mono);
+  font-size: var(--mgr-fs-xl);
+  font-variant-numeric: tabular-nums;
+}
+
+.mgr-mark-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.mgr-mark-panel__mark {
+  position: absolute;
+  right: var(--mgr-space-4);
+  bottom: var(--mgr-space-4);
+  width: clamp(48px, 12vw, 104px);
+  height: clamp(48px, 12vw, 104px);
+  color: var(--mgr-ink-muted);
+  opacity: var(--mgr-fx-grid-opacity);
+  pointer-events: none;
+}
+
+.mgr-md-surface {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: var(--mgr-lh-body);
+}
+
+.mgr-md-surface pre {
+  overflow: auto;
+  padding: var(--mgr-space-3);
+  background: var(--mgr-bg-void);
+  border: 1px solid var(--mgr-shell-border);
+  border-left: 4px solid var(--mgr-accent-cyan);
+  border-radius: var(--mgr-radius-sm);
+}
+
+.mgr-md-surface code {
+  font-family: var(--mgr-font-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mgr-agent-presence__dot { transform: none; }
+}

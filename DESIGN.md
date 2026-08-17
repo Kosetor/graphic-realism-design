@@ -1,66 +1,104 @@
 # DESIGN — Graphic Realism
 
-## Определение
+## Definition
 
-**Graphic Realism** — визуальный язык, где:
+**Graphic Realism** is a visual language where:
 
-1. **Графика:** деконструированный универсальный дизайн-язык, выразительный цвет, ограниченные материалы, плакатная читаемость.
-2. **Реализм:** правдоподобные пропорции, подразумеваемая функциональность, модульность, «инженерный» мир.
+1. **Graphic language:** a reduced universal system of geometry, expressive functional color, limited materials and poster-like scanability.
+2. **Realism:** credible proportions, implied function, modularity and product-grade usability.
 
-Для продуктов это даёт UI и графику, которые выглядят как **фирменный бренд научной утилиты / sports-tech**, а не generic cyberpunk и не photo-UI.
+It creates interfaces that feel like a **branded scientific utility / sport-tech operating environment**, not generic cyberpunk and not a static concept render.
 
-## Вдохновение (не копировать)
+## Reference implementation
 
-- Graphic Realism art direction (Marathon / Joseph Cross) — *как термин и принцип*
-- The Designers Republic / Wipeout — брендинг, максималистский минимализм
-- Mirror’s Edge — цвет как навигация, белый футуризм
-- Metal Gear Solid 2 — тактический chrome, кодексы
-- Спорт: F1 telemetry, лыжи/коньки, college sports gloss+matte
-- Industrial: warning tape, scaffolding, street-utilitarian Asia
-- Off-White diagonal hazard language
-- ASCII / halftone — только lore/codex слои
+[`Kosetor/personal-os`](https://github.com/Kosetor/personal-os) is the current **reference implementation** of this system in a working product context.
 
-## Столпы
+It establishes additional expectations:
 
-### 1. Ограниченные материалы
-Flat panel · hairline stroke · solid accent bar · hazard stripe · hard offset shadow (опционально) · mono data strip.
+- A real app/PWA shell, not an isolated card.
+- Config-driven theming and behavior rather than scattered visual values.
+- Agent presence, queues, activity and connection states as first-class UI.
+- Markdown-safe content surfaces for agent responses, code and data.
+- A controlled FX layer that is subordinate to function and readable without animation.
+- Responsive, touch-friendly and reduced-motion behavior.
 
-### 2. Цвет = функция
-Signal (navigate/danger) · Volt (go/ready) · Cyan (data/link) · Amber (warn).
-Максимум 2 акцента на view.
+Read [`agents/personal-os.md`](./agents/personal-os.md) when designing agent-native dashboards or Personal OS applications.
 
-### 3. Типографическая дисциплина
-Одна UI-гарнитура + mono для данных. CAPS labels с tracking. Никакого fontslop.
+## Three visual layers
 
-### 4. Геометрическая иконография
-24 grid, bold stroke, square caps, читаемость в 16px, silhouette uniqueness.
+```text
+Base    → typography, content, controls, data, layout
+Chrome  → panels, hairlines, labels, corner cuts, MGR geometry marks
+FX      → optional hatch/grid/noise/scan; never carries required information
+```
 
-### 5. Модульность
-Компоненты как блоки: panel, bar, chip, pip, bracket. Собираются в dashboard и slides одинаково.
+A screen must remain understandable with Chrome and FX removed.
 
-### 6. Иерархия > декор
-Если элемент не помогает сканировать информацию за 1–2 секунды — убрать.
+## Icon language
 
-## Носители
+**MGR Geometry Pack** at [`icons/mgr-geometry/`](./icons/mgr-geometry/) is the **recommended default visual icon/decal pack**.
 
-| Носитель | Приоритет |
-|----------|-----------|
-| Ops UI / agent dashboards | плотность, telemetry, status |
-| Marketing / slides | крупные display, 1 идея на слайд |
-| Icons & decals | система, консистентность |
-| Posters / thumbs | силуэт + 1 accent + wordmark |
+- MGR Geometry first: identity, navigation motifs, telemetry, objectives, signals, decorative chrome.
+- Phosphor Bold / Tabler / Lucide second: small conventional utility controls that do not exist in MGR.
+- Never treat the pack as wallpaper: one dominant geometric mark per panel/slide is normally enough.
 
-## Эмоциональный тон
+## Inspiration (do not copy)
 
-- Уверенный, спортивный, промышленный
-- Холодная база, горячий/кислотный акцент
-- «Снаряжение», не «магия»
-- Чистый футуризм колонии, не грязный alley-cyberpunk
+- Graphic Realism art direction (Marathon / Joseph Cross) — as a term and a design principle
+- The Designers Republic / Wipeout — branding and maximalist minimalism
+- Mirror’s Edge — white futurism and color-as-navigation
+- Metal Gear Solid 2 — tactical chrome and codex hierarchy
+- F1 telemetry and athletic technical equipment
+- Industrial wayfinding, warning tape and scaffolding
 
-## Анти-цели
+## Pillars
 
-- Photoreal skeuomorphism
-- Soft candy UI / big continuous radius
+### 1. Product-first composition
+
+The design has to survive real use: loading, errors, long Markdown, empty states, offline mode, narrow screens and frequent actions.
+
+### 2. Limited materials
+
+Flat panel · hairline stroke · solid accent bar · MGR geometry mark · hazard strip · hard offset shadow (optional) · mono data strip.
+
+### 3. Color is function
+
+Signal = attention/error. Volt = ready/action. Cyan = data/link. Amber = attention/warning.
+
+Use one primary accent and, if needed, one semantic status accent per view.
+
+### 4. Typography discipline
+
+One UI face + mono for data; display face only for titles/hero moments. CAPS labels with tracking. No fontslop.
+
+### 5. Agent-native state language
+
+State must be communicated through a **label + color + mark/shape**. Never through color alone.
+
+### 6. Geometric iconography
+
+Prefer MGR Geometry Pack. Use its marks deliberately as system vocabulary: cube = workspace, atom = model/core, globe = integration/world, crosshair = objective, diamond = state.
+
+### 7. Modularity and config
+
+Treat components as blocks and visual decisions as tokens/configuration. One source of truth for color, density, motion and states.
+
+### 8. Hierarchy over decoration
+
+If a mark, FX or animation does not help a user scan the product in 1–2 seconds, reduce or remove it.
+
+## Emotional tone
+
+- Confident, technical, athletic, industrial
+- Cold neutral base with functional high-energy accent
+- Capable equipment, not magic
+- Clean operational future—not a neon alley-cyberpunk scene
+
+## Anti-goals
+
+- Photo-real skeuomorphism
+- Soft candy UI / large continuous radius
 - Rainbow gradients
-- Destiny/Halo chrome as-is
-- Перегруженный multi-font HUD
+- Decorative glitch behind text/code
+- Copying Bungie/Marathon visual assets or UI
+- Screens that work only as screenshots

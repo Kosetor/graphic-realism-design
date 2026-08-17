@@ -1,136 +1,147 @@
-# Design Rules — Graphic Realism (full)
+# Design Rules — Graphic Realism (v1.1)
 
-## 1. Color
+## 1. Product baseline
+
+Before visual work, define:
+
+- Primary user task and the single primary action for this view.
+- Required states: loading, empty, working, ready, warning, error, offline.
+- Content type: UI controls, telemetry, Markdown, code, table, media.
+- Responsive behavior: desktop, compact, mobile.
+
+A design that has no state model is not an agent-native Graphic Realism screen.
+
+## 2. Three-layer rule
+
+| Layer | Purpose | Constraints |
+|---|---|---|
+| Base | Content, data, controls, typography | Must work by itself |
+| Chrome | Borders, labels, panels, corner cuts, MGR marks | Supports hierarchy and scanning |
+| FX | Hatch, grid, noise, scan, motion | Optional; max ~8% background opacity |
+
+Never put required text or a primary control only in FX.
+
+## 3. Color
 
 ### Surfaces
 | Token | Hex | Use |
-|-------|-----|-----|
+|---|---|---|
 | `--mgr-bg-void` | `#0B0C0E` | App canvas |
-| `--mgr-bg-base` | `#12141A` | Secondary canvas |
+| `--mgr-bg-base` | `#12141A` | Shell / navigation |
 | `--mgr-bg-panel` | `#1A1D24` | Cards / panels |
-| `--mgr-bg-elevated` | `#242832` | Elevated surfaces |
-| `--mgr-bg-white` | `#E8EAEF` | Light panels on void |
-| `--mgr-bg-frost` | `#F4F5F7` | Highest light surface |
+| `--mgr-bg-elevated` | `#242832` | Active/elevated surface |
+| `--mgr-bg-white` | `#E8EAEF` | Light panel / content contrast |
 
-### Ink
-| Token | Hex |
-|-------|-----|
-| `--mgr-ink-primary` | `#0B0C0E` |
-| `--mgr-ink-on-dark` | `#F4F5F7` |
-| `--mgr-ink-muted` | `#8B919C` |
-| `--mgr-ink-faint` | `#5A606C` |
+### State map
+| State | Token | Default MGR mark |
+|---|---|---|
+| Ready | `--mgr-state-ready` | `sun-rays`, `diamond-checker` |
+| Working | `--mgr-state-working` | `atom`, `bars` |
+| Queued | `--mgr-state-queued` | `line-circles-v` |
+| Attention | `--mgr-state-attention` | `triangle-arrows` |
+| Error | `--mgr-state-error` | `alert-circle` |
+| Offline | `--mgr-state-offline` | muted `globe` |
 
-### Accents (max 2 per view)
-| Token | Hex | Role |
-|-------|-----|------|
-| `--mgr-accent-signal` | `#FF3B4A` | Interactive path / danger |
-| `--mgr-accent-volt` | `#C8F542` | Ready / go / primary CTA |
-| `--mgr-accent-cyan` | `#3DE0FF` | Data / link / tech |
-| `--mgr-accent-amber` | `#FFB020` | Warning |
-| `--mgr-accent-violet` | `#A78BFA` | Special / rare |
+Rules:
 
-### Rules
-1. Color encodes function, not ornament.
-2. Never rely on color alone — pair with icon/label.
-3. WCAG AA minimum; HUD critical text prefer AAA.
-4. Light panels on dark void = signature move.
+1. Use maximum two accents per view, beyond semantic state reinforcement.
+2. Color encodes function, never ornament alone.
+3. Pair every state color with a text label and, where helpful, shape/icon.
+4. WCAG AA minimum; critical HUD/status text should prefer AAA.
 
-## 2. Typography
+## 4. Typography
 
-```
+```text
 UI:      Inter / IBM Plex Sans / system-ui
 Display: Space Grotesk / Chakra Petch / DIN Condensed
 Mono:    IBM Plex Mono / JetBrains Mono
 ```
 
 | Role | Size | Weight | Case |
-|------|------|--------|------|
+|---|---|---|---|
 | Display | 28–40 | 700 | Title/CAPS |
 | Title | 20–28 | 600–700 | Title |
-| Body | 14–16 | 400–500 | Sentence |
+| Body / Markdown | 14–16 | 400–500 | Sentence |
 | Label | 11–12 | 600 | ALL CAPS + tracking 0.08em |
 | Data | 12–14 mono | 500 | as-is |
 
-**Forbidden:** >3 type styles in one block; decorative outline/glitch fonts in primary UI.
+Markdown and code must have a dedicated readable surface. Never use display type for long responses.
 
-## 3. Space & shape
+## 5. Shell and responsive behavior
 
-- Grid base **8px** (4px micro)
-- Radius: 0 / 2 / 4 / 8 max (pill only for chips)
-- Border: 1px default, 2px strong controls
-- Optional clip-path corner cut 8–12px
-- Min hit target 44px
+Recommended shell: topbar + rail + main + statusbar. Use `components/shell.css`.
 
-## 4. Materials (pick 1–2 per component)
+| Width | Layout |
+|---|---|
+| ≥1200px | Rail + 12-column workspace |
+| 768–1199px | Icon rail + compact grid |
+| <768px | Bottom/overlay nav + one-column main |
 
-Allowed: flat fill · hairline · accent bar 4px · hazard stripe · hard shadow `4px 4px 0 #000` · mono inset strip · noise ≤6% on lore only.
+- Touch target: ≥44px.
+- Current task/action must stay visible on mobile.
+- Support offline/sync/connection status in app-shell products.
 
-Forbidden: heavy glass stack · soft 24px shadows · rainbow gradients · photo noise on primary UI.
+## 6. Shape and materials
 
-## 5. Motion
+- Grid base: 8px, 4px micro.
+- Radius: 0 / 2 / 4 / 8 max; pill only for compact state chips.
+- Border: 1px default, 2px strong controls.
+- Corner cut: use `clip-path` + inset shadow; do not leave a torn border.
+- Pick 1–2 materials per component: flat fill, hairline, accent bar, MGR mark, hazard strip, mono data strip.
 
-- Fast 120ms · UI 180ms · Panel 280ms
-- Ease: `cubic-bezier(0.2, 0.8, 0.2, 1)`
-- Enter: fade + 8–12px slide
-- Hover: border/accent change, not scale 1.05
-- Loading: segmented bar + mono %, not soft endless spinner
+## 7. MGR Geometry Pack
 
-## 6. Components
+Primary pack: [`icons/mgr-geometry/`](./icons/mgr-geometry/).
 
-### Panel
-Dark or light surface, 1px line, CAPS header label, optional left accent bar, optional corner cut.
+Use it for the system’s visual vocabulary before utility libraries:
 
-### Button
-| Variant | Style |
-|---------|-------|
-| Primary | solid volt/signal, CAPS, 700 |
-| Secondary | 2px outline |
-| Ghost | text + icon |
-| Danger | signal fill |
-| Ready | volt fill |
+| Need | First choice |
+|---|---|
+| Workspace/system | `cube-grid` |
+| AI/model | `atom` |
+| Network/integration | `globe-grid`, `interwoven` |
+| Focus/target | `crosshair-square` |
+| Verification | `diamond-checker` |
+| Timeline/queue | `line-circles-v`, `bars` |
+| Activation | `lightning-bolts`, `sun-rays` |
+| Error | `alert-circle` |
+| Dividers/chrome | `zigzag-band`, `radial-square` |
 
-### Tabs
-CAPS · active = 2px underline OR filled chip — not both + glow.
+- One dominant mark per panel/slide.
+- Data/mark color: cyan; action/ready: volt; alert: signal; structure: muted.
+- Background mark opacity: 4–8%.
+- Use conventional utility icons from Phosphor/Tabler only when MGR lacks the semantic control.
 
-### Telemetry
-Mono value · CAPS xs label above · rectangular progress.
+## 8. Motion and FX
 
-### HUD
-Corners of viewport · critical only · mono + status color on alert.
+- Fast 120ms · UI 180ms · Panel 280ms.
+- Enter: fade + 8–12px slide.
+- Hover: border/accent change, not big scale.
+- FX opacity: grid ≤5%, hatch ≤6%, noise ≤3%, max general background decoration ≤8%.
+- Honor `prefers-reduced-motion`.
+- Never place moving/animated FX behind code, text inputs or critical telemetry.
 
-## 7. Icons
+## 9. Agent components
 
-- ViewBox 24×24, safe 2px
-- Stroke 1.75 (1.5–2.0), `currentColor`
-- `stroke-linecap: square`, `stroke-linejoin: miter`
-- Outline default · solid active
-- Readable at 16px
-- Naming: `ic-{domain}-{name}-{outline|solid}.svg`
+Use `components/agent-console.css` for:
 
-Full rules: `icons/README.md`.
+- Presence chip with named state
+- Task/queue rows
+- Telemetry grid
+- Markdown surface
+- Low-opacity panel mark
 
-## 8. Decals
+Primary agent view should answer in 1–2 seconds:
 
-Required kit: hazard 45° · corner registration · accent bar · tick ruler · status pip · bracket frame · diagonal hatch (≤8% opacity).
+1. What is the agent doing now?
+2. Is user action required?
+3. What is the next useful action?
 
-Full rules: `decals/README.md`.
+## 10. A11y and IP
 
-## 9. Slides
-
-- 1 idea per slide
-- Large display type
-- Void or white field + one accent
-- Decals as edge chrome, not center noise
-- See `agents/slides.md`
-
-## 10. A11y
-
-- Focus ring 2px accent
-- Contrast AA+
-- `aria-` labels on icon-only controls
-- Don’t convey state by color only
-- Prefer `prefers-reduced-motion`
-
-## 11. IP
-
-Original work only. No Bungie/Marathon/Kurppa Hosk assets, logos, or UI clones.
+- Visible 2px focus ring.
+- Labels for icon-only controls.
+- Color is never the only state signal.
+- Respect reduced motion.
+- Create original work; do not copy Bungie/Marathon/Kurppa Hosk assets, logos or UI.
+- Verify source licenses before distributing assets from `icons/mgr-geometry/`.

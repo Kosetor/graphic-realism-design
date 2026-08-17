@@ -1,0 +1,44 @@
+/* Personal OS semantic layer for Graphic Realism.
+   Import AFTER tokens/tokens.css.
+   Purpose: bind MGR primitives to an agent-native app shell.
+*/
+
+:root {
+  /* Shell */
+  --mgr-shell-canvas: var(--mgr-bg-void);
+  --mgr-shell-surface: var(--mgr-bg-base);
+  --mgr-shell-panel: var(--mgr-bg-panel);
+  --mgr-shell-raised: var(--mgr-bg-elevated);
+  --mgr-shell-border: var(--mgr-line);
+  --mgr-shell-border-strong: var(--mgr-line-strong);
+
+  /* Navigation */
+  --mgr-nav-bg: var(--mgr-bg-base);
+  --mgr-nav-active-bg: var(--mgr-bg-elevated);
+  --mgr-nav-active-ink: var(--mgr-ink-on-dark);
+  --mgr-nav-idle-ink: var(--mgr-ink-muted);
+  --mgr-nav-width: 248px;
+  --mgr-topbar-height: 56px;
+  --mgr-statusbar-height: 28px;
+
+  /* Agent states: use with text labels and MGR marks */
+  --mgr-state-ready: var(--mgr-accent-volt);
+  --mgr-state-working: var(--mgr-accent-cyan);
+  --mgr-state-queued: var(--mgr-ink-muted);
+  --mgr-state-attention: var(--mgr-accent-amber);
+  --mgr-state-error: var(--mgr-accent-signal);
+  --mgr-state-offline: var(--mgr-ink-faint);
+
+  /* FX: decorative only; no essential information */
+  --mgr-fx-grid-opacity: 0.05;
+  --mgr-fx-hatch-opacity: 0.06;
+  --mgr-fx-noise-opacity: 0.03;
+  --mgr-fx-scan-opacity: 0.04;
+
+  /* PWA / interaction */
+  --mgr-focus-ring: var(--mgr-accent-cyan);
+  --mgr-touch-target: 44px;
+  --mgr-shell-z-nav: 20;
+  --mgr-shell-z-topbar: 30;
+  --mgr-shell-z-overlay: 50;
+}

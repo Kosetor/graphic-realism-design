@@ -1,38 +1,38 @@
-# Rules — quick checklist
+# Rules — quick checklist (v1.1)
 
-Use before shipping any UI / slide / graphic.
+## Product first
 
-## Always
+- [ ] Primary task and one primary CTA are explicit
+- [ ] Ready / working / queued / warning / error / offline states considered
+- [ ] Markdown and code have readable surfaces
+- [ ] Mobile behavior and 44px targets are defined
 
-- [ ] Tokens from `tokens/tokens.css` only (no random hex)
-- [ ] ≤2 accent colors on the view
-- [ ] CAPS labels + mono for numbers/IDs
+## Visual system
+
+- [ ] Tokens only; no arbitrary hex values
+- [ ] Base works without chrome/FX
+- [ ] ≤2 accents per view
+- [ ] CAPS labels + mono for data/IDs
 - [ ] Radius ≤8px; prefer 2–4px
-- [ ] Icons 24 grid, stroke ~1.75, `currentColor`
-- [ ] One primary CTA
+- [ ] One dominant MGR Geometry mark per panel/slide
+- [ ] Background mark/FX ≤8% opacity
+- [ ] Text label + color + mark for states
+
+## Icons
+
+- [ ] First choice: `icons/mgr-geometry/`
+- [ ] Use Phosphor/Tabler only for absent utility semantics
+- [ ] Do not mix visual icon languages in one focal component
+- [ ] `ic-q-logo.svg` only if source/license/brand context permits
+
+## Quality
+
 - [ ] Contrast AA+
 - [ ] Focus states visible
-- [ ] Original assets only (no Bungie IP)
+- [ ] `prefers-reduced-motion` respected
+- [ ] No decorative FX behind code or primary text
+- [ ] No copied Bungie/Marathon IP
 
-## Never
+## Agent output
 
-- [ ] Fontslop (4+ type styles mashed)
-- [ ] Glass + blur + gradient + stripe all at once
-- [ ] Neon everywhere
-- [ ] Soft huge shadows as primary depth
-- [ ] Thin 1px icons mixed with bold set
-- [ ] Continuous decorative animation on decals
-
-## Assets path map
-
-```text
-icons/outline/     default
-icons/solid/       active
-decals/            chrome marks
-backgrounds/       patterns ≤8% opacity
-components/        utilities.css
-```
-
-## Agent output shape
-
-Intent → Tokens → Wire → SVG → Code → A11y → Sources
+Intent → Shell map → Tokens/state map → MGR assets → Code → Responsive → A11y → Sources
